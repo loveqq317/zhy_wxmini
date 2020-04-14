@@ -1,0 +1,54 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/project/index",
+    "pages/company/index",
+    "pages/profile/index",
+    "pages/login/index",
+    "pages/detail/index",
+    "pages/search/index"
+
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#F7734F",
+    "navigationBarTitleText": "钢构天下",
+    "navigationBarTextStyle":"white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#F7734F",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./icon/home.png",
+        "selectedIconPath": "./icon/home_active.png"
+      },
+      {
+        "pagePath": "pages/company/index",
+        "text": "公司简介",
+        "iconPath": "./icon/company.png",
+        "selectedIconPath": "./icon/company_active.png"
+      },
+      {
+        "pagePath": "pages/project/index",
+        "text": "项目大厅",
+        "iconPath": "./icon/project.png",
+        "selectedIconPath": "./icon/project_active.png"
+      },
+
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "./icon/profile.png",
+        "selectedIconPath": "./icon/profile_active.png"
+      }
+    ]
+  }
+}

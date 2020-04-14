@@ -1,0 +1,33 @@
+<view class="contain">
+    <!-- 搜索框 开始   -->
+    <SearchInput></SearchInput>
+    <!-- 搜索框 结束   -->
+    <!--轮播图  开始-->
+    <!--  swiper 默认  100% * 150px
+            image标签默认  320px*240px
+            mode属性
+            widthFix
+      -->
+    <view class="index_swiper">
+        <swiper autoplay indicator-dots >
+            <swiper-item wx:for="{{swiperList}}" wx:key="id">
+                <navigator>
+                    <image src="{{item.thumb}}" mode="widthFix"></image>
+                </navigator>
+            </swiper-item>
+        </swiper>
+
+    </view>
+    <!--轮播图  结束-->
+    <!--导航  开始-->
+    <view class="index_cate">
+        <navigator wx:for="{{cateList}}" wx:key="id">
+            <image mode="widthFix" src="{{item.image_src}}"></image>
+            <text>{{item.name}}</text>
+        </navigator>
+    </view>
+    <!--导航  结束-->
+    <!-- 首页项目展示  开始  -->
+    <MyCard list="{{swiperList}}"></MyCard>
+    <!-- 首页项目展示  结束  -->
+</view>

@@ -1,0 +1,45 @@
+<view class="user_info_wrap">
+    <view class="user_img_wrap">
+        <block wx:if="{{userInfo.nickName}}">
+            <image class="user_bg" src="{{userInfo.avatarUrl}}"/>
+            <view class="user_info">
+                <image class="user_icon" src="{{userInfo.avatarUrl}}" />
+                <view class="user_name">{{userInfo.nickName}}</view>
+            </view>
+        </block>
+        <button class="user_btn" wx:else bindtap="handleLogin">登录</button>
+    </view>
+    <view class="user_content">
+        <view class="user_main">
+
+            <view class="user_action">
+                <view class="my">资料管理</view>
+                <view class="action_info">
+                    <view class="item">
+                        <view class="iconfont iconmyinfo"></view>
+                        <text bindtap="commonToast">修改资料</text>
+                    </view>
+                    <view class="item" bindtap="commonToast">
+                        <view class="iconfont iconyinhangka"></view>
+                        <text>账户信息</text>
+                    </view>
+                    <view class="item" bindtap="commonToast">
+                        <view class="iconfont iconshimingrenzhengrenzheng"></view>
+                        <text>实名认证</text>
+                    </view>
+                    <view class="item" bindtap="commonToast">
+                        <view class="iconfont iconqiehuanshenfen"></view>
+                        <text>切换身份</text>
+                    </view>
+                </view>
+            </view>
+
+            <view class="user_action">
+                <view class="my">基本资料</view>
+
+            </view>
+        </view>
+
+    </view>
+
+</view>

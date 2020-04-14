@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "SearchInput": "../../components/SearchInput/SearchInput",
+    "MyTab": "../../components/MyTab/MyTab",
+    "MyCard": "../../components/MyCard/MyCard"
+  },
+  "navigationBarTitleText": "项目大厅"
+}

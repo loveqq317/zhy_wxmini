@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "SearchInput": "../../components/SearchInput/SearchInput",
+    "MyCard": "../../components/MyCard/MyCard"
+  },
+  "navigationBarTitleText": "钢构天下"
+}

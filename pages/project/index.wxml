@@ -1,0 +1,31 @@
+<view class="project_wrap">
+    <!--搜索框  开始-->
+    <SearchInput></SearchInput>
+    <!--搜索框  结束-->
+    <!-- Tab  开始   -->
+    <MyTab tabs="{{tabs}}" binditemChange="handleItemChange">
+        <block wx:if="{{tabs[0].isActive}}">
+        <!-- 全部项目展示  开始 -->
+            <MyCard list="{{allProjects}}"></MyCard>
+        <!-- 全部项目展示  结束 -->
+        </block>
+        <block wx:if="{{tabs[1].isActive}}">
+        <!-- 待承包项目展示  开始 -->
+            <MyCard list="{{toBeResivedProjects}}"></MyCard>
+        <!-- 待承包项目展示  结束 -->
+        </block>
+        <block wx:if="{{tabs[2].isActive}}">
+        <!-- 进行中项目展示  开始 -->
+            <MyCard list="{{doingProjects}}"></MyCard>
+        <!-- 进行中项目展示  结束 -->
+        </block>
+        <block wx:if="{{tabs[3].isActive}}">
+        <!-- 已完成项目展示  开始 -->
+            <MyCard list="{{overProjects}}"></MyCard>
+        <!-- 已完成项目展示  结束 -->
+        </block>
+
+    </MyTab>
+    <!-- Tab  结束   -->
+
+</view>
