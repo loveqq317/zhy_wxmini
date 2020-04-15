@@ -11,33 +11,49 @@
     </view>
     <view class="user_content">
         <view class="user_main">
-
+            <!--资料管理  开始-->
             <view class="user_action">
                 <view class="my">资料管理</view>
                 <view class="action_info">
-                    <view class="item">
+                    <navigator url="/pages/baseuserdata/index" class="item">
                         <view class="iconfont iconmyinfo"></view>
                         <text bindtap="commonToast">修改资料</text>
-                    </view>
-                    <view class="item" bindtap="commonToast">
+                    </navigator>
+                    <navigator url="/pages/userdata/index?type=2" class="item">
                         <view class="iconfont iconyinhangka"></view>
                         <text>账户信息</text>
-                    </view>
-                    <view class="item" bindtap="commonToast">
+                    </navigator>
+                    <navigator url="/pages/userdata/index?type=3" class="item">
                         <view class="iconfont iconshimingrenzhengrenzheng"></view>
                         <text>实名认证</text>
-                    </view>
-                    <view class="item" bindtap="commonToast">
+                    </navigator>
+                     <view class="item">
                         <view class="iconfont iconqiehuanshenfen"></view>
                         <text>切换身份</text>
-                    </view>
+                     </view>
                 </view>
             </view>
+            <!--资料管理  结束-->
 
-            <view class="user_action">
+            <!--基本资料展示  开始-->
+            <view class="user_info_show">
                 <view class="my">基本资料</view>
-
+                <view class="card_info_wrap">
+                    <block wx:for="{{userDatas}}" wx:key="index">
+                        <CardInfo title="{{item.title}}" info="{{item.info}}"></CardInfo>
+                    </block>
+                </view>
             </view>
+            <!--基本资料展示  结束-->
+
+            <!--作品管理  开始-->
+            <view class="user_action">
+                <view class="my">我的作品</view>
+                <view class="action_info">
+                   <navigator class="action_href"> 作品管理 </navigator>
+                </view>
+            </view>
+            <!--作品管理  结束-->
         </view>
 
     </view>

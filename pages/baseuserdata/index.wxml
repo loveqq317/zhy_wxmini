@@ -1,0 +1,87 @@
+<view class="container">
+    <view class="bg-fff p-lr30 border-t">
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">昵称</label>
+            <input type="text" class="ml40 flex1" placeholder="请输入昵称" bindinput="getNameValue"></input>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">手机号码</label>
+            <input type="text" class="ml40 flex1" maxlength="11" placeholder="请输入手机号码" bindinput="getPhoneValue"></input>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">邮箱</label>
+            <input type="text" class="ml40 flex1"  placeholder="请输入邮箱" bindinput="getEmailValue"></input>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center jc-sb">
+            <view class="flex ai-center">
+                <label for="" class="font14">所在地区</label>
+                <picker mode="region" class="ml40 flex1 region" placeholder="省、市、区" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                    <view class="picker flex1 texthide">
+                        {{region[0]}} {{region[1]}} {{region[2]}}
+                    </view>
+                </picker>
+            </view>
+            <view class="flex">
+                <text wx:if="{{regionFlag}}">请选择</text>
+                <text class="iconfont icon-youjiantou color-a5a5a5 ml20"></text>
+            </view>
+        </view>
+
+        <view class="ipt-wrap border-b">
+            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入详细地址，精确到门牌号"      bindinput="getAddressValue"></textarea>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">毕业院校</label>
+            <input type="text" class="ml40 flex1" placeholder="请输入毕业院校" bindinput="getUniversityValue"></input>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">专业</label>
+            <input type="text" class="ml40 flex1" placeholder="请输入专业" bindinput="getMajorValue"></input>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">学历</label>
+            <input type="text" class="ml40 flex1" placeholder="请输入学历" bindinput="getEducationValue"></input>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">工作年限</label>
+            <input type="text" class="ml40 flex1" placeholder="请输入工作年限" bindinput="getWorkYearValue"></input>
+        </view>
+
+        <view class="ipt-wrap border-b flex ai-center jc-sb">
+            <view class="flex ai-center">
+                <label for="" class="font14">所属企业</label>
+                <input type="text" class="ml40 flex1" placeholder="请输入所属企业" bindinput="getWorkPlaceValue"></input>
+            </view>
+            <view class="flex">
+                <view class="default-wrap">
+                    <checkbox-group >
+                        <checkbox value="{{isShowWorkplace}}" checked="{{isShowWorkplace}}" bindtap="handleCheckboxChange">显示</checkbox>
+                    </checkbox-group>
+                </view>
+            </view>
+        </view>
+        <view class="ipt-wrap border-b">
+            <label for="" class="font14">证书与奖项</label>
+            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入证书与奖项"  bindinput="getCertificatePriceValue"></textarea>
+        </view>
+        <view class="ipt-wrap border-b">
+            <label for="" class="font14">工作经历</label>
+            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入工作经历"  bindinput="getWorkHistoryValue"></textarea>
+        </view>
+        <view class="ipt-wrap border-b">
+            <label for="" class="font14">个人简历</label>
+            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入个人简历"  bindinput="getResumeValue"></textarea>
+        </view>
+        <view class="ipt-wrap border-b">
+            <label for="" class="font14">个人能力展示</label>
+
+        </view>
+
+    </view>
+
+
+
+    <view class="combtn font16 color-fff _w100 bg-btn" data-url="../addNewAddress/addNewAddress" bindtap="saveNewAddress">
+        保存
+    </view>
+</view>

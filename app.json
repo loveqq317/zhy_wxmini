@@ -6,8 +6,10 @@
     "pages/profile/index",
     "pages/login/index",
     "pages/detail/index",
-    "pages/search/index"
-
+    "pages/search/index",
+    "pages/userdata/index",
+    "pages/baseuserdata/index",
+    "pages/phone/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

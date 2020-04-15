@@ -11,9 +11,17 @@ Page({
     //console.log(e);
     const {userInfo}=e.detail;
     wx.setStorageSync("userInfo",userInfo);
+    //跳转手机号授权：不能做，因为小程序没有认证
+    /*wx.navigateTo({
+      url:'../phone/index'
+    })*/
+
     wx.navigateBack({
       delta:1
     });
+
+
+
   },
   /**
    * 生命周期函数--监听页面加载

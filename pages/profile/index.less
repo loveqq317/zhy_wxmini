@@ -50,7 +50,7 @@ page{
       width: 90%;
       left: 50%;
       transform: translateX(-50%);
-      top: -150rpx;
+      top: -109rpx;
 
       //用户操作--- 开始
       .user_action{
@@ -62,34 +62,49 @@ page{
           align-items: center;
           height: 80rpx;
           padding-left: 20rpx;
+          border-bottom: 1px solid #F4F4F4;
         }
         .action_info{
           display: flex;
           align-items: center;
           justify-content: space-around;
           height: 100rpx;
-          border-top: 1px solid #FBFBFB;
+
           .item{
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            width:100%;
+            height: 100%;
+            padding-top:20rpx;
             .iconfont{
               color: var(--themeColor);
             }
           }
+          .action_href{
+            color:#005A51;
+          }
+
         }
       }
       //用户操作--- 结束
 
       // 用户基本资料展示 ---  开始
       .user_info_show{
-        display: flex;
-        align-items: center;
-        height: 80rpx;
-        margin: 30rpx 0;
         background-color: #ffffff;
-        padding-left: 20rpx;
+        margin-top: 30rpx;
+        border-radius: 10rpx;
+        .my{
+          display: flex;
+          align-items: center;
+          height: 80rpx;
+          padding-left: 20rpx;
+          border-bottom: 1px solid #F4F4F4;
+        }
+        .card_info_wrap{
+          margin:0 20rpx;
+        }
       }
       // 用户基本资料展示 ---  结束
     }

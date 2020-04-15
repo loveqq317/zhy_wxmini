@@ -1,0 +1,1 @@
+<button type="primary" plain open-type="getPhoneNumber" bindgetphonenumber="handleGetPhoneNum">获取手机号授权</button>

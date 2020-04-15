@@ -1,0 +1,17 @@
+<view class="userdata_wrap">
+    <!-- Tab  开始   -->
+    <MyTab tabs="{{tabs}}" binditemChange="handleItemChange">
+        <block wx:if="{{tabs[0].isActive}}">
+
+        </block>
+        <block wx:if="{{tabs[1].isActive}}">
+           2
+        </block>
+        <block wx:if="{{tabs[2].isActive}}">
+           3
+        </block>
+
+
+    </MyTab>
+    <!-- Tab  结束   -->
+</view>

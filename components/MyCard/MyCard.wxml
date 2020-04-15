@@ -1,5 +1,5 @@
 <view class="project_wrap">
-    <view class="project_item" wx:for="{{list}}" key="id">
+    <view class="project_item" wx:for="{{list}}" wx:key="id">
         <view class="project_title">{{item.title}}</view>
         <image src="{{item.thumb}}" alt="" mode="widthFix" class="project_img"></image>
         <view class="project_info">{{item.info}}</view>

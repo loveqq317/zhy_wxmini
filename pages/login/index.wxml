@@ -1,1 +1,1 @@
-<button type="primary" plain open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">登录授权</button>
+<button type="primary" plain open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">获取您的用户信息授权</button>
