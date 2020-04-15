@@ -1,9 +1,10 @@
 {
   "usingComponents": {
-    "mp-halfScreenDialog": "../../components/half-screen-dialog/half-screen-dialog",
-    "mp-cells": "../components/cells/cells",
-    "mp-cell": "../components/cell/cell",
-    "mp-slideview": "../components/slideview/slideview"
+    "mp-actionSheet": "../../components/actionsheet/actionsheet",
+    "mp-cells": "../../components/cells/cells",
+    "mp-cell": "../../components/cell/cell",
+    "mp-slideview": "../../components/slideview/slideview",
+    "MyModal": "../../components/MyModal/MyModal"
   },
   "navigationBarTitleText": "个人资料"
 }

@@ -72,11 +72,31 @@
             <label for="" class="font14">个人简历</label>
             <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入个人简历"  bindinput="getResumeValue"></textarea>
         </view>
-        <view class="ipt-wrap border-b">
-            <label for="" class="font14">个人能力展示</label>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">技能标签</label>
+
+            <input type="text" class="ml40 flex1" placeholder="请选择技能标签" bindtap="showSkillDialog"></input>
 
         </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <text>{{skillChecks}}</text>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">能力标签</label>
+            <input type="text" class="ml40 flex1" placeholder="请选择能力标签" bindtap="showAbilityDialog"></input>
+        </view>
 
+        <view class="ipt-wrap border-b flex ai-center">
+            <text>{{abilityChecks}}</text>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">服务时间</label>
+            <input type="text" class="ml40 flex1" placeholder="请选择服务时间" bindtap="showServiceTime"></input>
+        </view>
+        <view class="ipt-wrap border-b flex ai-center">
+            <label for="" class="font14">线下服务</label>
+            <input type="text" class="ml40 flex1" placeholder="请选择是否线下服务" bindtap="showUnderLineTime"></input>
+        </view>
     </view>
 
 
@@ -84,4 +104,30 @@
     <view class="combtn font16 color-fff _w100 bg-btn" data-url="../addNewAddress/addNewAddress" bindtap="saveNewAddress">
         保存
     </view>
+    <mp-actionSheet bindactiontap="btnClickService" show="{{showServiceAction}}" actions="{{serviceGroups}}" ext-class="actionSheet"
+                    title="请选择服务时间">
+    </mp-actionSheet>
+    <mp-actionSheet bindactiontap="btnClickService" show="{{showUnderLineAction}}" actions="{{underLineGroups}}" ext-class="actionSheet"
+                    title="是否接受线下服务">
+    </mp-actionSheet>
+    <MyModal show="{{showAbilityModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmAblility'>
+        <view class='modal-content' >
+            <view class="modal">请选择您的能力标签</view>
+            <checkbox-group bindchange="checkboxChangeAbility">
+                <label class="checkbox" wx:for="{{items}}">
+                    <checkbox value="{{item.name}}-{{item.value}}"  checked="{{item.checked}}"/>{{item.value}}
+                </label>
+            </checkbox-group>
+        </view>
+    </MyModal>
+    <MyModal show="{{showSkillModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmSkill'>
+        <view class='modal-content' >
+            <view class="modal">请选择您的技能标签</view>
+            <checkbox-group bindchange="checkboxChangeSkill">
+                <label class="checkbox" wx:for="{{items}}">
+                    <checkbox value="{{item.name}}-{{item.value}}"  checked="{{item.checked}}"/>{{item.value}}
+                </label>
+            </checkbox-group>
+        </view>
+    </MyModal>
 </view>

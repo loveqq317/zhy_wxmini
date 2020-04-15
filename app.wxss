@@ -49,7 +49,7 @@ view,text{font-size: 13px;}
 .bg-fa9c3e{background: #fa9c3e;}
 .bg-24a9e2{background: #24a9e2;}
 
-.bg-btn{background: linear-gradient(to right, #66ded0, #229dfe);}
+.bg-btn{background: linear-gradient(to right, #F7A893, var(--themeColor));}
 
 
 .font-w-b{font-weight: bold;}

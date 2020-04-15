@@ -22,11 +22,88 @@ Page({
     floorValue: 0,
     remarksValue: '',
     addressStatus: 0,
-    userID: 0
+    userID: 0,
+    showSkillModal:false,
+    showAbilityModal:false,
+    items: [
+      { name: '01', value: '城镇规划' },
+      { name: '02', value: '文旅规划' },
+      { name: '03', value: '乡村规划' },
+      { name: '04', value: '风景区规划' }
+    ],
+    skillChecks:[],
+    abilityChecks:[],
+    showServiceAction: false,
+    showUnderLineAction:false,
+    serviceGroups: [
+      { text: '全部时间', value: 0 },
+      { text: '工作日夜晚', value: 1 },
+      { text: '工作日夜晚及休息日', value: 2},
+      { text: '休息日', value: 3},
+    ],
+    underLineGroups: [
+      { text: '是', value: 0 },
+      { text: '否', value: 1 }
+
+    ],
   },
   onLoad: function (){
     let self = this;
     this.setData({ userID: app.globalData.userID });
+  },
+  btnClickService(e) {
+    console.log(e)
+    this.close()
+  },
+  close: function () {
+    this.setData({
+      showServiceAction: false,
+      showUnderLineAction:false
+    })
+  },
+  showUnderLineTime(e){
+    this.setData({
+      showUnderLineAction:true
+    })
+  },
+  showServiceTime(e){
+    this.setData({
+      showServiceAction:true
+    })
+  },
+  checkboxChangeSkill: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e)
+    this.setData({
+      skillChecks: e.detail.value
+    })
+  },
+  checkboxChangeAbility: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e)
+    this.setData({
+      abilityChecks: e.detail.value
+    })
+  },
+  showSkillDialog(e){
+    this.setData({
+      showSkillModal:true
+    })
+  },
+  showAbilityDialog(e){
+    this.setData({
+      showAbilityModal:true
+    })
+  },
+  modalConfirmSkill(e){
+    console.log(33333)
+    this.setData({
+      showSkillModal:false
+    })
+  },
+  modalConfirmAbility(e){
+    console.log(33333)
+    this.setData({
+      showAbilityModal:false
+    })
   },
   changeIconStatu: function () {
     var self = this;
@@ -51,7 +128,6 @@ Page({
   },
   getEmailValue(e){
     this.setData({ emailValue: e.detail.value });
-
   },
   getWorkYearValue(e){
     this.setData({ workYearValue: e.detail.value });
@@ -81,37 +157,15 @@ Page({
   getFloorValue: function (e) {
     this.setData({ floorValue: e.detail.value });
   },
-  getRemarksValue: function (e) {
-    this.setData({ remarksValue: e.detail.value });
-  },
-  defaultChange: function (e){
-    if (e.detail.value){
-      this.setData({ addressStatus: 1 });
-    }else{
-      this.setData({ addressStatus: 0 });
-    }
-  },
+
+  // defaultChange: function (e){
+  //   if (e.detail.value){
+  //     this.setData({ addressStatus: 1 });
+  //   }else{
+  //     this.setData({ addressStatus: 0 });
+  //   }
+  // },
   saveNewAddress: function () {
-    let self = this,
-        regionFlag = self.data.regionFlag,
-        addressStatus = self.data.addressStatus,
-        region = self.data.region,
-        str = '';
-    for (let i = 0, len = region.length; i < len; i++){
-      if (region[i].length == 1){region[i] = region[i-1];}
-      str += region[i] + ' ';
-    }
-    let byUrl = api.INTERFACES.findByAddress, byData = { areaName: str};
-    if (!common.ISNAME(self.data.nameValue)){
-      common.SHOWTIPS('请输入您的昵称', 'none'); return;
-    }else if (!common.ISPHONE(self.data.phoneValue)){
-      common.SHOWTIPS('请输入正确的11位手机号码', 'none'); return;
-    } else if (self.data.regionFlag) {
-      common.SHOWTIPS('请选择省市区', 'none'); return;
-    } else if (!self.data.textareaValue){
-      common.SHOWTIPS('请输入详细地址', 'none'); return;
-    } else if (!self.data.floorValue){
-      common.SHOWTIPS('请输入楼层号', 'none'); return;
-    }
+
   }
 });
