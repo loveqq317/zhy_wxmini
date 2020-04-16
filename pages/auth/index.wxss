@@ -1,0 +1,15 @@
+.auth_content{
+    text-align: center;
+    margin: 100rpx auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.auth_content view{
+    margin:20rpx auto;
+}
+.head_img{
+    width:120rpx;
+}
+

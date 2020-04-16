@@ -9,7 +9,8 @@
     "pages/search/index",
     "pages/userdata/index",
     "pages/baseuserdata/index",
-    "pages/phone/index"
+    "pages/phone/index",
+    "pages/auth/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -17,7 +18,7 @@
     "navigationBarTitleText": "钢构天下",
     "navigationBarTextStyle":"white"
   },
-  "style": "v2",
+
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "color": "#8a8a8a",

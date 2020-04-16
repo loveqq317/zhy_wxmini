@@ -16,12 +16,29 @@ Page({
       url:'../phone/index'
     })*/
 
+
     wx.navigateBack({
       delta:1
     });
 
 
 
+  },
+  //获取用户登录状态
+  userLogin() {
+    wx.checkSession({
+      success: function () {
+        //存在登陆态
+        console.log("登录有效")
+      },
+      fail: function () {
+        console.log("登录失效")
+        //跳转登录授权页面
+        wx.navigateTo({
+          url:'../auth/index'
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载

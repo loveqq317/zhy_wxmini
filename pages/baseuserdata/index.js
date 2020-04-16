@@ -3,6 +3,7 @@ const app = getApp();
 
 Page({
   data: {
+    userId:'',
     elevatorFlag: 0,
     nameValue: '',
     universityValue:'',
@@ -18,11 +19,15 @@ Page({
     resumeValue:'',
     region: ["省", "市", "区"],
     regionFlag: 1,
+    abilityFlag:1,
+    skillFlag:1,
+    serviceFlag:1,
+    underlineFlag:1,
     addressValue: '',
     floorValue: 0,
     remarksValue: '',
     addressStatus: 0,
-    userID: 0,
+
     showSkillModal:false,
     showAbilityModal:false,
     items: [
@@ -32,7 +37,9 @@ Page({
       { name: '04', value: '风景区规划' }
     ],
     skillChecks:[],
+    skillChecksText:[],
     abilityChecks:[],
+    alilityChecksText:[],
     showServiceAction: false,
     showUnderLineAction:false,
     serviceGroups: [
@@ -46,13 +53,73 @@ Page({
       { text: '否', value: 1 }
 
     ],
+    serviceTimeValue:'',
+    serviceTimeText:'',
+    underLineValue:'',
+    underLineText:''
   },
   onLoad: function (){
     let self = this;
-    this.setData({ userID: app.globalData.userID });
+    this.setData({ userId: wx.getStorageSync("userId") });
+    wx.request({
+      url: "http://localhost:8080/jeecg-boot/api/mini/user/user",
+      data: {
+        id:this.data.userId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) =>{
+        console.log(res.data.result);
+        const data=res.data.result;
+        this.setData({
+          nameValue:data.name
+        })
+      }
+    })
+  },
+  formSubmit(e){
+    console.log(e.detail.value);
+    let data= e.detail.value;
+    data.serviceTime=this.data.serviceTimeValue;
+    data.ifUnderLine=this.data.underLineValue;
+    data.ablilityTag=this.data.abilityChecks.join(',');
+    data.skillTag=this.data.skillChecks.join(',');
+   // data.push('isShow')
+    console.log(data)
+  data.id=this.data.userId;
+    wx.request({
+      method: "PUT",
+      url: "http://localhost:8080/jeecg-boot/api/mini/user/edituser",
+      data: data,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function(res) {
+        wx.showToast({
+          title: '保存成功',
+          duration: 2000
+        })
+      }
+    })
+
   },
   btnClickService(e) {
     console.log(e)
+    this.setData({
+      serviceTimeValue:e.detail.value,
+      serviceTimeText:this.data.serviceGroups[e.detail.index].text,
+      serviceFlag: 0
+    })
+    this.close()
+  },
+  btnClickUnderLine(e) {
+    console.log(e)
+    this.setData({
+      underLineValue:e.detail.value,
+      underLineText:this.data.underLineGroups[e.detail.index].text,
+      underlineFlag: 0
+    })
     this.close()
   },
   close: function () {
@@ -73,15 +140,28 @@ Page({
   },
   checkboxChangeSkill: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e)
+    const bb=e.detail.value;
+    //TODO :
+    const aa= this.data.items.filter(function (e) { return  bb.includes(e.name); })
+        .map(function(s){return s.value});
     this.setData({
-      skillChecks: e.detail.value
+      skillChecks: e.detail.value,
+      skillChecksText:aa,
+      skillFlag: 0
     })
   },
   checkboxChangeAbility: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e)
+    const bb=e.detail.value;
+    //TODO :
+   const aa= this.data.items.filter(function (e) { return  bb.includes(e.name); })
+       .map(function(s){return s.value});
     this.setData({
-      abilityChecks: e.detail.value
+      abilityChecks: e.detail.value,
+      alilityChecksText:aa,
+      abilityFlag: 0
     })
+
   },
   showSkillDialog(e){
     this.setData({

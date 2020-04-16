@@ -89,6 +89,13 @@
 					"id": -1,
 					"name": "pages/baseuserdata/index",
 					"pathName": "pages/baseuserdata/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/auth/index",
+					"pathName": "pages/auth/index",
 					"scene": null
 				}
 			]

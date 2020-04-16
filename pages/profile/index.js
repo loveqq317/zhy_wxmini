@@ -13,11 +13,12 @@ Page({
       {title:'使用软件',info:'3D建模/Sketchup建模/BIM/PPT表达'},
       {title:'个人简历',info:'本人从事设计行业，多次参与大型建筑设计，代表作有北京东城官员等'},
       {title:'拥有技能',info:'方案创作/设计项目负责/项目汇报/施工图'}
-    ]
+    ],
+    token:null
   },
   handleLogin(){
     wx.navigateTo({
-      url:"../login/index"
+      url:"../auth/index"
     })
   },
   /**
@@ -40,7 +41,9 @@ Page({
   onShow: function () {
     //获取缓存中的 用户信息
     let userInfo = wx.getStorageSync("userInfo");
-    this.setData({userInfo});
+    let token=wx.getStorageSync("token");
+    this.setData({userInfo,token});
+
   },
 
   /**

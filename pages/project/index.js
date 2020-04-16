@@ -48,7 +48,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const token = wx.getStorageSync("token");
+    if(!token || token.length == 0){
+      wx.redirectTo({
+        url:'../auth/index'
+      })
+    }
   },
 
   /**

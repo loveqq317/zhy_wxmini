@@ -1,133 +1,158 @@
 <view class="container">
-    <view class="bg-fff p-lr30 border-t">
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">昵称</label>
-            <input type="text" class="ml40 flex1" placeholder="请输入昵称" bindinput="getNameValue"></input>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">手机号码</label>
-            <input type="text" class="ml40 flex1" maxlength="11" placeholder="请输入手机号码" bindinput="getPhoneValue"></input>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">邮箱</label>
-            <input type="text" class="ml40 flex1"  placeholder="请输入邮箱" bindinput="getEmailValue"></input>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center jc-sb">
-            <view class="flex ai-center">
-                <label for="" class="font14">所在地区</label>
-                <picker mode="region" class="ml40 flex1 region" placeholder="省、市、区" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-                    <view class="picker flex1 texthide">
-                        {{region[0]}} {{region[1]}} {{region[2]}}
+    <form bindsubmit="formSubmit">
+        <view class="bg-fff p-lr30 border-t">
+            <view class="ipt-wrap border-b flex ai-center">
+                <label for="name" class="font14">昵称</label>
+                <input id="name" name="name" type="text" class="ml40 flex1" placeholder="请输入昵称" bindinput="getNameValue" value="{{nameValue}}"></input>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center">
+                <label for="" class="font14">手机号码</label>
+                <input type="text" name="phone" class="ml40 flex1" maxlength="11" placeholder="请输入手机号码" bindinput="getPhoneValue" value="{{phoneValue}}"></input>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center">
+                <label for="" class="font14">邮箱</label>
+                <input type="text" name="email" class="ml40 flex1"  placeholder="请输入邮箱" bindinput="getEmailValue"></input>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center jc-sb">
+                <view class="flex ai-center">
+                    <label for="" class="font14">所在地区</label>
+                    <picker name="region" mode="region" class="ml40 flex1 region" placeholder="省、市、区" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                        <view class="picker flex1 texthide">
+                            {{region[0]}} {{region[1]}} {{region[2]}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="flex">
+                    <text wx:if="{{regionFlag}}">请选择</text>
+                    <text class="iconfont iconyoujiantou color-a5a5a5 ml20"></text>
+                </view>
+            </view>
+
+            <view class="ipt-wrap border-b">
+                <textarea name="address" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入详细地址，精确到门牌号"      bindinput="getAddressValue"></textarea>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center">
+                <label for="" class="font14">毕业院校</label>
+                <input  name="university" type="text" class="ml40 flex1" placeholder="请输入毕业院校" bindinput="getUniversityValue"></input>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center">
+                <label for="" class="font14">专业</label>
+                <input name="major" type="text" class="ml40 flex1" placeholder="请输入专业" bindinput="getMajorValue"></input>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center">
+                <label for="" class="font14">学历</label>
+                <input name="education" type="text" class="ml40 flex1" placeholder="请输入学历" bindinput="getEducationValue"></input>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center">
+                <label for="" class="font14">工作年限</label>
+                <input name="workYear" type="text" class="ml40 flex1" placeholder="请输入工作年限" bindinput="getWorkYearValue"></input>
+            </view>
+
+            <view class="ipt-wrap border-b flex ai-center jc-sb">
+                <view class="flex ai-center">
+                    <label for="" class="font14">所属企业</label>
+                    <input name="workplace" type="text" class="ml40 flex1" placeholder="请输入所属企业" bindinput="getWorkPlaceValue"></input>
+                </view>
+                <view class="flex">
+                    <view class="default-wrap">
+                        <switch name="isShowWorkplace"/>显示
+<!--                        <checkbox-group name="isShowWorkPlaceArray" bindtap="handleCheckboxChange" >-->
+<!--                            <checkbox  value="{{isShowWorkplace}}" checked="{{isShowWorkplace}}" >显示</checkbox>-->
+<!--                        </checkbox-group>-->
                     </view>
-                </picker>
+                </view>
             </view>
-            <view class="flex">
-                <text wx:if="{{regionFlag}}">请选择</text>
-                <text class="iconfont icon-youjiantou color-a5a5a5 ml20"></text>
+            <view class="ipt-wrap border-b">
+                <label for="" class="font14">证书与奖项</label>
+                <textarea name="certificatePrice" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入证书与奖项"  bindinput="getCertificatePriceValue"></textarea>
             </view>
-        </view>
+            <view class="ipt-wrap border-b">
+                <label for="" class="font14">工作经历</label>
+                <textarea name="workHistory" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入工作经历"  bindinput="getWorkHistoryValue"></textarea>
+            </view>
+            <view class="ipt-wrap border-b">
+                <label for="" class="font14">个人简历</label>
+                <textarea name="resume" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入个人简历"  bindinput="getResumeValue"></textarea>
+            </view>
+            <view class="ipt-wrap border-b flex ai-center jc-sb">
+                <view class="flex ai-center">
+                    <label for="" class="font14">技能标签</label>
+                    <input name="skillTag" type="text" class="ml40 flex1" placeholder="请选择技能标签" bindtap="showSkillDialog" value="{{skillChecksText}}"></input>
+                </view>
+                <view class="flex" bindtap="showSkillDialog">
+                    <text wx:if="{{skillFlag}}">请选择</text>
+                    <text class="iconfont iconyoujiantou color-a5a5a5 ml20"></text>
+                </view>
+            </view>
+            <!-- <view class="ipt-wrap border-b flex ai-center">
+                 <text>{{skillChecks}}</text>
+        </view>-->
+            <view class="ipt-wrap border-b flex ai-center jc-sb">
+                <view class="flex ai-center">
+                    <label for="" class="font14">能力标签</label>
+                    <input type="text" name="ablilityTag" class="ml40 flex1" placeholder="请选择能力标签" bindtap="showAbilityDialog" value="{{alilityChecksText}}"></input>
+                </view>
+                <view class="flex" bindtap="showAbilityDialog">
+                    <text  wx:if="{{abilityFlag}}">请选择</text>
+                    <text class="iconfont iconyoujiantou color-a5a5a5 ml20"></text>
+                </view>
+            </view>
 
-        <view class="ipt-wrap border-b">
-            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入详细地址，精确到门牌号"      bindinput="getAddressValue"></textarea>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">毕业院校</label>
-            <input type="text" class="ml40 flex1" placeholder="请输入毕业院校" bindinput="getUniversityValue"></input>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">专业</label>
-            <input type="text" class="ml40 flex1" placeholder="请输入专业" bindinput="getMajorValue"></input>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">学历</label>
-            <input type="text" class="ml40 flex1" placeholder="请输入学历" bindinput="getEducationValue"></input>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">工作年限</label>
-            <input type="text" class="ml40 flex1" placeholder="请输入工作年限" bindinput="getWorkYearValue"></input>
-        </view>
-
-        <view class="ipt-wrap border-b flex ai-center jc-sb">
-            <view class="flex ai-center">
-                <label for="" class="font14">所属企业</label>
-                <input type="text" class="ml40 flex1" placeholder="请输入所属企业" bindinput="getWorkPlaceValue"></input>
+            <!--  <view class="ipt-wrap border-b flex ai-center">
+                  <text>{{abilityChecks}}</text>
+        </view>-->
+            <view class="ipt-wrap border-b flex ai-center jc-sb">
+                <view class="flex ai-center">
+                    <label for="" class="font14">服务时间</label>
+                    <input name="serviceTime" type="text" class="ml40 flex1" placeholder="请选择服务时间" bindtap="showServiceTime" value="{{serviceTimeText}}"></input>
+                </view>
+                <view class="flex" bindtap="showServiceTime">
+                    <text  wx:if="{{serviceFlag}}">请选择</text>
+                    <text class="iconfont iconyoujiantou color-a5a5a5 ml20"></text>
+                </view>
             </view>
-            <view class="flex">
-                <view class="default-wrap">
-                    <checkbox-group >
-                        <checkbox value="{{isShowWorkplace}}" checked="{{isShowWorkplace}}" bindtap="handleCheckboxChange">显示</checkbox>
-                    </checkbox-group>
+            <view class="ipt-wrap border-b flex ai-center jc-sb">
+                <view class="flex ai-center">
+                    <label for="" class="font14">线下服务</label>
+                    <input name="ifUnderLine" type="text" class="ml40 flex1" placeholder="请选择是否线下服务" bindtap="showUnderLineTime" value="{{underLineText}}"></input>
+                </view>
+                <view class="flex" bindtap="showUnderLineTime">
+                    <text wx:if="{{underlineFlag}}">请选择</text>
+                    <text class="iconfont iconyoujiantou color-a5a5a5 ml20"></text>
                 </view>
             </view>
         </view>
-        <view class="ipt-wrap border-b">
-            <label for="" class="font14">证书与奖项</label>
-            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入证书与奖项"  bindinput="getCertificatePriceValue"></textarea>
-        </view>
-        <view class="ipt-wrap border-b">
-            <label for="" class="font14">工作经历</label>
-            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入工作经历"  bindinput="getWorkHistoryValue"></textarea>
-        </view>
-        <view class="ipt-wrap border-b">
-            <label for="" class="font14">个人简历</label>
-            <textarea name="" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入个人简历"  bindinput="getResumeValue"></textarea>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">技能标签</label>
-
-            <input type="text" class="ml40 flex1" placeholder="请选择技能标签" bindtap="showSkillDialog"></input>
-
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <text>{{skillChecks}}</text>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">能力标签</label>
-            <input type="text" class="ml40 flex1" placeholder="请选择能力标签" bindtap="showAbilityDialog"></input>
-        </view>
-
-        <view class="ipt-wrap border-b flex ai-center">
-            <text>{{abilityChecks}}</text>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">服务时间</label>
-            <input type="text" class="ml40 flex1" placeholder="请选择服务时间" bindtap="showServiceTime"></input>
-        </view>
-        <view class="ipt-wrap border-b flex ai-center">
-            <label for="" class="font14">线下服务</label>
-            <input type="text" class="ml40 flex1" placeholder="请选择是否线下服务" bindtap="showUnderLineTime"></input>
-        </view>
-    </view>
 
 
 
-    <view class="combtn font16 color-fff _w100 bg-btn" data-url="../addNewAddress/addNewAddress" bindtap="saveNewAddress">
-        保存
-    </view>
-    <mp-actionSheet bindactiontap="btnClickService" show="{{showServiceAction}}" actions="{{serviceGroups}}" ext-class="actionSheet"
-                    title="请选择服务时间">
-    </mp-actionSheet>
-    <mp-actionSheet bindactiontap="btnClickService" show="{{showUnderLineAction}}" actions="{{underLineGroups}}" ext-class="actionSheet"
-                    title="是否接受线下服务">
-    </mp-actionSheet>
-    <MyModal show="{{showAbilityModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmAblility'>
-        <view class='modal-content' >
-            <view class="modal">请选择您的能力标签</view>
-            <checkbox-group bindchange="checkboxChangeAbility">
-                <label class="checkbox" wx:for="{{items}}">
-                    <checkbox value="{{item.name}}-{{item.value}}"  checked="{{item.checked}}"/>{{item.value}}
-                </label>
-            </checkbox-group>
-        </view>
-    </MyModal>
-    <MyModal show="{{showSkillModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmSkill'>
-        <view class='modal-content' >
-            <view class="modal">请选择您的技能标签</view>
-            <checkbox-group bindchange="checkboxChangeSkill">
-                <label class="checkbox" wx:for="{{items}}">
-                    <checkbox value="{{item.name}}-{{item.value}}"  checked="{{item.checked}}"/>{{item.value}}
-                </label>
-            </checkbox-group>
-        </view>
-    </MyModal>
+        <button class=" font16 color-fff _w100 bg-btn" form-type="submit" size="default">
+            保存
+        </button>
+        <mp-actionSheet  bindactiontap="btnClickService" show="{{showServiceAction}}" actions="{{serviceGroups}}" ext-class="actionSheet"
+                         title="请选择服务时间">
+        </mp-actionSheet>
+        <mp-actionSheet bindactiontap="btnClickUnderLine" show="{{showUnderLineAction}}" actions="{{underLineGroups}}" ext-class="actionSheet"
+                        title="是否接受线下服务">
+        </mp-actionSheet>
+        <MyModal show="{{showAbilityModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmAblility'>
+            <view class='modal-content' >
+                <view class="modal">请选择您的能力标签</view>
+                <checkbox-group bindchange="checkboxChangeAbility">
+                    <label class="checkbox" wx:for="{{items}}">
+                        <checkbox value="{{item.name}}"  checked="{{item.checked}}"/>{{item.value}}
+                    </label>
+                </checkbox-group>
+            </view>
+        </MyModal>
+        <MyModal show="{{showSkillModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmSkill'>
+            <view class='modal-content' >
+                <view class="modal">请选择您的技能标签</view>
+                <checkbox-group bindchange="checkboxChangeSkill">
+                    <label class="checkbox" wx:for="{{items}}">
+                        <checkbox value="{{item.name}}"  checked="{{item.checked}}"/>{{item.value}}
+                    </label>
+                </checkbox-group>
+            </view>
+        </MyModal>
+    </form>
 </view>

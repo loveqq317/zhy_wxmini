@@ -1,0 +1,11 @@
+<view class="auth_wrap">
+    <view class="auth_content">
+        <image mode="widthFix" class="head_img" src="../../icon/company.png"></image>
+        <view class="system_name">钢构天下</view>
+        <view class="auth_info">请求获取您的公开信息（昵称、头像等）</view>
+    </view>
+   <view class="auth_btn">
+       <button class="font16 color-fff _w80 bg-btn" open-type="getUserInfo" bindgetuserinfo="handleLoginAndUserInfo">微信授权</button>
+       <navigator open-type="switchTab" url="../index/index"><button class="font16 color-767676 _w80 mt10" bindtap="handleBackIndex">返回首页</button></navigator>
+   </view>
+</view>

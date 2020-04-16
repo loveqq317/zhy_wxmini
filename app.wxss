@@ -284,10 +284,10 @@ view,text{font-size: 13px;}
     color: #363636;
 }
 .combtn{
-    height: 100rpx;
+    /*height: 80rpx;*/
     text-align: center;
-    line-height: 100rpx;
-    margin: 0 auto;
+ /*   line-height: 80rpx;*/
+    margin:0 auto;
     border-radius: 5rpx;
     /*position: fixed;*/
     /*bottom: 0;*/
