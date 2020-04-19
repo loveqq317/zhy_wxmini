@@ -1,11 +1,14 @@
 //es6
-export default (params)=>{
+export const request= (params)=>{
   wx.showLoading({
     title:'加载中'
   })
+  //定义公共url
+  const baseUrl="http://localhost:8080/jeecg-boot/api/mini/user";
   return new Promise((resolve,reject)=>{
     wx.request({
       ...params,
+      url:baseUrl+params.url,
       success(res){
         resolve(res.data)
       },

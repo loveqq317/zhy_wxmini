@@ -1,17 +1,38 @@
 <view class="container">
     <form bindsubmit="formSubmit">
         <view class="bg-fff p-lr30 border-t">
+            <view class="ipt-wrap border-b flex ai-center jc-sb">
+                <view class="flex ai-center">
+                    <label for="name" class="font14">头像</label>
+                </view>
+                <view class="flex" bindtap="changeImg">
+                    <view class="navigator-content-text" wx:if="{{avatarUrl!=null}}">
+
+                        <image mode="widthFix" class="avatar" src="{{avatarUrl}}"></image>
+
+                    </view>
+
+                    <view class="navigator-content-text" wx:else>
+
+                        <image mode="widthFix" class="avatar" src="{{userTop.avatarUrl}}"></image>
+
+                    </view>
+
+<!--                    <image src="{{userTop.avatarUrl}}" class="avatar" mode="widthFix"></image>-->
+                    <text class="iconfont iconyoujiantou color-a5a5a5 ml20"></text>
+                </view>
+            </view>
             <view class="ipt-wrap border-b flex ai-center">
                 <label for="name" class="font14">昵称</label>
-                <input id="name" name="name" type="text" class="ml40 flex1" placeholder="请输入昵称" bindinput="getNameValue" value="{{nameValue}}"></input>
+                <input id="name" name="name" data-item="name" type="text" class="ml40 flex1" placeholder="请输入昵称"  value="{{userTop.name}}"></input>
             </view>
             <view class="ipt-wrap border-b flex ai-center">
                 <label for="" class="font14">手机号码</label>
-                <input type="text" name="phone" class="ml40 flex1" maxlength="11" placeholder="请输入手机号码" bindinput="getPhoneValue" value="{{phoneValue}}"></input>
+                <input type="text" name="phone" class="ml40 flex1" maxlength="11" placeholder="请输入手机号码"  value="{{userTop.phone}}"></input>
             </view>
             <view class="ipt-wrap border-b flex ai-center">
                 <label for="" class="font14">邮箱</label>
-                <input type="text" name="email" class="ml40 flex1"  placeholder="请输入邮箱" bindinput="getEmailValue"></input>
+                <input type="text" name="email" class="ml40 flex1"  placeholder="请输入邮箱" value="{{userTop.email}}" ></input>
             </view>
             <view class="ipt-wrap border-b flex ai-center jc-sb">
                 <view class="flex ai-center">
@@ -29,50 +50,47 @@
             </view>
 
             <view class="ipt-wrap border-b">
-                <textarea name="address" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入详细地址，精确到门牌号"      bindinput="getAddressValue"></textarea>
+                <textarea name="address" value="{{userTop.address}}" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入详细地址，精确到门牌号"      ></textarea>
             </view>
             <view class="ipt-wrap border-b flex ai-center">
                 <label for="" class="font14">毕业院校</label>
-                <input  name="university" type="text" class="ml40 flex1" placeholder="请输入毕业院校" bindinput="getUniversityValue"></input>
+                <input  name="university" value="{{userTop.university}}" type="text" class="ml40 flex1" placeholder="请输入毕业院校" ></input>
             </view>
             <view class="ipt-wrap border-b flex ai-center">
                 <label for="" class="font14">专业</label>
-                <input name="major" type="text" class="ml40 flex1" placeholder="请输入专业" bindinput="getMajorValue"></input>
+                <input name="major" value="{{userTop.major}}" type="text" class="ml40 flex1" placeholder="请输入专业" ></input>
             </view>
             <view class="ipt-wrap border-b flex ai-center">
                 <label for="" class="font14">学历</label>
-                <input name="education" type="text" class="ml40 flex1" placeholder="请输入学历" bindinput="getEducationValue"></input>
+                <input name="education" value="{{userTop.education}}" type="text" class="ml40 flex1" placeholder="请输入学历" ></input>
             </view>
             <view class="ipt-wrap border-b flex ai-center">
                 <label for="" class="font14">工作年限</label>
-                <input name="workYear" type="text" class="ml40 flex1" placeholder="请输入工作年限" bindinput="getWorkYearValue"></input>
+                <input name="workYear" value="{{userTop.workYear}}" type="text" class="ml40 flex1" placeholder="请输入工作年限" ></input>
             </view>
 
             <view class="ipt-wrap border-b flex ai-center jc-sb">
                 <view class="flex ai-center">
                     <label for="" class="font14">所属企业</label>
-                    <input name="workplace" type="text" class="ml40 flex1" placeholder="请输入所属企业" bindinput="getWorkPlaceValue"></input>
+                    <input name="workplace" value="{{userTop.workplace}}" type="text" class="ml40 flex1" placeholder="请输入所属企业" ></input>
                 </view>
                 <view class="flex">
                     <view class="default-wrap">
-                        <switch name="isShowWorkplace"/>显示
-<!--                        <checkbox-group name="isShowWorkPlaceArray" bindtap="handleCheckboxChange" >-->
-<!--                            <checkbox  value="{{isShowWorkplace}}" checked="{{isShowWorkplace}}" >显示</checkbox>-->
-<!--                        </checkbox-group>-->
+                        <switch name="isShowWorkplace" checked="{{userTop.isShowWorkplace}}"/>显示
                     </view>
                 </view>
             </view>
             <view class="ipt-wrap border-b">
                 <label for="" class="font14">证书与奖项</label>
-                <textarea name="certificatePrice" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入证书与奖项"  bindinput="getCertificatePriceValue"></textarea>
+                <textarea name="certificatePrice" value="{{userTop.certificatePrice}}" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入证书与奖项"  ></textarea>
             </view>
             <view class="ipt-wrap border-b">
                 <label for="" class="font14">工作经历</label>
-                <textarea name="workHistory" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入工作经历"  bindinput="getWorkHistoryValue"></textarea>
+                <textarea name="workHistory" value="{{userTop.workHistory}}" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入工作经历"  ></textarea>
             </view>
             <view class="ipt-wrap border-b">
                 <label for="" class="font14">个人简历</label>
-                <textarea name="resume" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入个人简历"  bindinput="getResumeValue"></textarea>
+                <textarea name="resume" value="{{userTop.resume}}" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" placeholder="请输入个人简历"  ></textarea>
             </view>
             <view class="ipt-wrap border-b flex ai-center jc-sb">
                 <view class="flex ai-center">
@@ -136,22 +154,30 @@
         </mp-actionSheet>
         <MyModal show="{{showAbilityModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmAblility'>
             <view class='modal-content' >
-                <view class="modal">请选择您的能力标签</view>
-                <checkbox-group bindchange="checkboxChangeAbility">
-                    <label class="checkbox" wx:for="{{items}}">
-                        <checkbox value="{{item.name}}"  checked="{{item.checked}}"/>{{item.value}}
-                    </label>
-                </checkbox-group>
+                <view class="modal_title">请选择您的能力标签</view>
+                <view class="modal_info">最多选择两个专业方向，每个专业方向下最多选择5个标签</view>
+                <view wx:for="{{abilityTagList}}" wx:key="{{item.id}}">
+                    <view class="tag_title">{{item.name}}</view>
+                    <checkbox-group class="tag_group" bindchange="checkboxChangeAbility">
+                        <label class="tag_checkbox" wx:for="{{item.child}}" wx:for-index="{{item.child.id}}" wx:for-item="child">
+                            <checkbox value="{{child.code}}"  checked="{{child.checked}}"/>{{child.name}}
+                        </label>
+                    </checkbox-group>
+                </view>
+
             </view>
         </MyModal>
         <MyModal show="{{showSkillModal}}" height='75%' bindcancel="modalCancel" bindconfirm='modalConfirmSkill'>
             <view class='modal-content' >
-                <view class="modal">请选择您的技能标签</view>
-                <checkbox-group bindchange="checkboxChangeSkill">
-                    <label class="checkbox" wx:for="{{items}}">
-                        <checkbox value="{{item.name}}"  checked="{{item.checked}}"/>{{item.value}}
-                    </label>
-                </checkbox-group>
+                <view class="modal_title">请选择您的技能标签</view>
+                <view class="modal_info">最多选择5个标签</view>
+                <view>
+                    <checkbox-group class="tag_group" bindchange="checkboxChangeSkill">
+                        <label class="tag_checkbox"  wx:for="{{skillTagList}}" wx:key="{{item.id}}" style="width:100%;">
+                            <checkbox value="{{item.code}}"  checked="{{item.checked}}"/>{{item.name}}
+                        </label>
+                    </checkbox-group>
+                </view>
             </view>
         </MyModal>
     </form>

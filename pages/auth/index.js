@@ -1,5 +1,4 @@
-// pages/auth/index.js
-//var common =require('../../common/common.js');
+import {request} from "../../request/request.js"
 const app= getApp();
 const TOKEN='token';
 Page({
@@ -31,20 +30,16 @@ Page({
     });
   },
   check_token(token){
-    wx.request({
-      url:"http://localhost:8080/jeecg-boot/api/mini/user/auth",
+    request({
+      url:"/auth",
       data:{
         token
-      },
-      success:(res)=>{
-        if(res.data.success){
-          app.globalData.token=token;
-        }else{
-          this.login();
-        }
-      },
-      fail:(res)=>{
-        console.log(res);
+      }
+    }).then(res=>{
+      if(res.data.success){
+        app.globalData.token=token;
+      }else{
+        this.login();
       }
     })
   },
@@ -55,31 +50,28 @@ Page({
         //1、获取code
         const code=res.code;
         //2、将code发送给我们的服务器
-        wx.request({
-          url:"http://localhost:8080/jeecg-boot/api/mini/user/login",
+        request({
+          url:"/login",
           data:{
             code
-          },
-          success:(res)=>{
-            console.log(res.data);
-            // code: 1
-            // message: "登陆成功"
-            // token: "eyJraWQiOiIx
-            const errorcode=res.data.code;
-            if(errorcode == 1){
-
-              const token=res.data.token;
-              app.globalData.token=token;
-              app.globalData.userId=res.data.userId;
-              console.log(app.globalData.token);
-              wx.setStorageSync(TOKEN,token);
-              wx.setStorageSync("userId",res.data.userId);
-              //更新用户信息
-              this.updateWxUser();
-            }
-
-
           }
+        }).then(result=>{
+          // code: 1
+          // message: "登陆成功"
+          // token: "eyJraWQiOiIx
+          const errorcode=result.code;
+          if(errorcode == 1){
+
+            const token=result.token;
+            app.globalData.token=token;
+            app.globalData.userId=result.userId;
+            console.log(app.globalData.token);
+            wx.setStorageSync(TOKEN,token);
+            wx.setStorageSync("userId",result.userId);
+            //更新用户信息
+            this.updateWxUser();
+          }
+
         })
       }
     })
@@ -88,16 +80,15 @@ Page({
 updateWxUser(){
   let user=wx.getStorageSync("userInfo");
   user.id=wx.getStorageSync("userId");
-  wx.request({
+  request({
     method: "PUT",
-    url:"http://localhost:8080/jeecg-boot/api/mini/user/editwxuser",
+    url:"/editwxuser",
     header: {
       'content-type': 'application/json'
     },
-    data:user,
-    success:(res)=>{
+    data:user
+  }).then(res=>{
       console.log(res);
-    }
   })
 },
   /**

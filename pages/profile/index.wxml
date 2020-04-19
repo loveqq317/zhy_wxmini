@@ -40,8 +40,9 @@
             <view class="user_info_show">
                 <view class="my">基本资料</view>
                 <view class="card_info_wrap">
-                    <block wx:for="{{userDatas}}" wx:key="index">
-                        <CardInfo title="{{item.title}}" info="{{item.info}}"></CardInfo>
+                    <block>
+                        <CardInfo title="擅长专业——规划设计" info=""></CardInfo>
+                        <CardInfo title="擅长专业——建筑设计" info=""></CardInfo>
                     </block>
                 </view>
             </view>

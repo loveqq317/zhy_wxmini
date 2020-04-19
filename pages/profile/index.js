@@ -1,4 +1,5 @@
-// pages/profile/index.js
+import {request} from "../../request/request.js"
+const app=getApp();
 Page({
 
   /**
@@ -14,6 +15,8 @@ Page({
       {title:'个人简历',info:'本人从事设计行业，多次参与大型建筑设计，代表作有北京东城官员等'},
       {title:'拥有技能',info:'方案创作/设计项目负责/项目汇报/施工图'}
     ],
+    userId:{},
+    userProfile:{},
     token:null
   },
   handleLogin(){
@@ -25,9 +28,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //获取缓存中的 用户信息
+    let userInfo = wx.getStorageSync("userInfo");
+    let token=wx.getStorageSync("token");
+    const userId=wx.getStorageSync("userId");
+    this.setData({userInfo,token,userId});
+    this.getUserProfile(userId);
 
   },
-
+  getUserProfile(userId){
+    request({
+      url: "/user",
+      data: {
+        id:userId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+    }).then(res=>{
+      this.setData({
+        userProfile:res.result
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -39,10 +62,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //获取缓存中的 用户信息
-    let userInfo = wx.getStorageSync("userInfo");
-    let token=wx.getStorageSync("token");
-    this.setData({userInfo,token});
+
 
   },
 

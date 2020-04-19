@@ -1,122 +1,276 @@
-
+import {getDictByCode} from "../../common/common.js"
+import {request} from "../../request/request.js"
 const app = getApp();
 
 Page({
   data: {
-    userId:'',
-    elevatorFlag: 0,
-    nameValue: '',
-    universityValue:'',
-    majorValue:'',
-    educationValue:'',
-    phoneValue: '',
-    emailValue:'',
-    workYearValue:'',
-    workPlaceValue:'',
-    isShowWorkplace:false,
-    certificatePriceValue:'',
-    workHistoryValue:'',
-    resumeValue:'',
-    region: ["省", "市", "区"],
+    //表单里的user
+    userTop:{
+      region: ["省", "市", "区"],//所在城市、国家、省份
+      //数据库获取的user
+      avatarUrl:null,
+      name: '',//姓名
+      university:'',//学校
+      major:'',//专业
+      education:'',//学历
+      phone: '',//电话
+      email:'',//邮箱
+      workYear:'',//工作年限
+      workplace:'',//所在公司
+      isShowWorkplace:false,//是否显示所在公司
+      certificatePrice:'',//证书与奖项
+      workHistory:'',//工作履历
+      resume:'',//个人简历
+      address: '',//详细地址
+      abilityTag:'',//能力标签
+      skillTag:'',//技能标签
+      serviceTime:'',//服务时间
+      ifUnderLine:'',//是否接受线下服务
+
+    },
+    region: ["省", "市", "区"],//所在城市、国家、省份
+    userId:'',//用户ID
+    //数据库获取的user
+   /* avatarUrl:null,
+    userId:'',//用户ID
+    name: '',//姓名
+    university:'',//学校
+    major:'',//专业
+    education:'',//学历
+    phone: '',//电话
+    email:'',//邮箱
+    workYear:'',//工作年限
+    workplace:'',//所在公司
+    isShowWorkplace:false,//是否显示所在公司
+    certificatePrice:'',//证书与奖项
+    workHistory:'',//工作履历
+    resume:'',//个人简历
+    address: '',//详细地址
+    abilityTag:'',//能力标签
+    skillTag:'',//技能标签*/
+    //serviceTime:'',//服务时间
+   // ifUnderLine:'',//是否接受线下服务
+    //---右箭头是否显示标识 开始
     regionFlag: 1,
     abilityFlag:1,
     skillFlag:1,
     serviceFlag:1,
     underlineFlag:1,
-    addressValue: '',
-    floorValue: 0,
-    remarksValue: '',
-    addressStatus: 0,
-
+    //---右箭头是否显示标识  结束
+    //----modal显示标识
     showSkillModal:false,
     showAbilityModal:false,
-    items: [
-      { name: '01', value: '城镇规划' },
-      { name: '02', value: '文旅规划' },
-      { name: '03', value: '乡村规划' },
-      { name: '04', value: '风景区规划' }
-    ],
-    skillChecks:[],
+    //-----数据库获取能力和技能标签列表
+    abilityTagList: [],//全部能力标签
+    skillTagList:[],//全部技能标签
+    skillChecks:[],//选中的技能标签集合
     skillChecksText:[],
-    abilityChecks:[],
+    abilityChecks:[],//选中的能力标签集合
     alilityChecksText:[],
     showServiceAction: false,
     showUnderLineAction:false,
     serviceGroups: [
-      { text: '全部时间', value: 0 },
-      { text: '工作日夜晚', value: 1 },
-      { text: '工作日夜晚及休息日', value: 2},
-      { text: '休息日', value: 3},
+
     ],
     underLineGroups: [
       { text: '是', value: 0 },
       { text: '否', value: 1 }
 
     ],
-    serviceTimeValue:'',
+
     serviceTimeText:'',
-    underLineValue:'',
+
     underLineText:''
   },
+  //换头像
+  changeImg(){
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success:(res)=>{
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths
+        this.setData({
+          'userTop.avatarUrl':tempFilePaths[0]
+        })
+        //更新数据库
+         request({
+           method: "PUT",
+           url: "/editavatar",
+           data: {
+             id:this.data.userId,
+             'userTop.avatarUrl':tempFilePaths[0]
+           },
+           header: {
+             'content-type': 'application/json'
+           }
+         }).then(result=>{
+
+             wx.showToast({
+               title: '头像切换成功',
+               duration: 2000
+             })
+
+         })
+      }
+    })
+  },
+  handleBindInput: function(e){
+    //debugger;
+    let item=e.currentTarget.dataset.item; //在每个input绑定不同的item作为标识
+    const userTop=this.data.userTop
+    userTop[item]=e.detail.value //对象的属性名称是动态判定时，通过方括号标记访问
+    this.setData({
+      userTop
+    })
+  },
   onLoad: function (){
-    let self = this;
+    //获取用户ID
     this.setData({ userId: wx.getStorageSync("userId") });
-    wx.request({
-      url: "http://localhost:8080/jeecg-boot/api/mini/user/user",
+    //获取全部能力标签
+    this.getAbilityTagList("B01");
+    //获取全部技能标签
+    this.getSkillTagList("B02");
+    //获取服务时间列表
+    this.getDicItemList("service_time").then(res=>{
+      this.setData({
+        serviceGroups: res.result
+      })
+    }).then(res=>{
+      //获取用户资料
+      this.getUserProfile()
+    })
+
+  },
+  async getDicItemList(code) {
+   return await getDictByCode({
+      code
+    })
+  },
+  //获取用户资料
+  getUserProfile(){
+   request({
+      url: "/user",
       data: {
         id:this.data.userId
       },
       header: {
         'content-type': 'application/json'
-      },
-      success: (res) =>{
-        console.log(res.data.result);
-        const data=res.data.result;
-        this.setData({
-          nameValue:data.name
-        })
       }
+    }).then(res=>{
+        const {result}=res;
+        this.setData({
+          userTop:result
+
+        })
+        if(result.region){
+          this.setData({
+            region:[result.region,result.region1,result.region2]
+          })
+        }
+        if(result.abilityTag && result.abilityTag.length > 0 ){
+          this.setData({
+            abilityChecks:result.abilityTag.split(",")
+          })
+        }
+        if(result.skillTag && result.skillTag.length > 0 ){
+          this.setData({
+            skillChecks:result.skillTag.split(",")
+          })
+        }
+        if(result.serviceTime){
+          this.setData({
+            serviceTimeText:this.data.serviceGroups[result.serviceTime].text,
+          })
+        }
+        if(result.ifUnderLine){
+          this.setData({
+            underLineText:this.data.underLineGroups[result.ifUnderLine].text,
+          })
+
+        }
+
+
+
     })
   },
+   getAbilityTagList(pcode) {
+    request({
+      url: "/categoryByCode",
+      data: {
+        pcode
+      },
+      header: {
+        'content-type': 'application/json'
+      }
+    }).then(res=>{
+      const result=res.result
+      this.setData({
+        abilityTagList:result
+      })
+    })
+  },
+   getSkillTagList(pcode) {
+     request({
+      url: "/categoryByCode",
+      data: {
+        pcode
+      },
+      header: {
+        'content-type': 'application/json'
+      }
+
+    }).then(res=>{
+       this.setData({
+         skillTagList:res.result
+       })
+     })
+  },
   formSubmit(e){
-    console.log(e.detail.value);
     let data= e.detail.value;
-    data.serviceTime=this.data.serviceTimeValue;
-    data.ifUnderLine=this.data.underLineValue;
-    data.ablilityTag=this.data.abilityChecks.join(',');
-    data.skillTag=this.data.skillChecks.join(',');
-   // data.push('isShow')
-    console.log(data)
-  data.id=this.data.userId;
-    wx.request({
+    data.region=this.data.region[0];
+    data.region1=this.data.region[1];
+    data.region2=this.data.region[2];
+    data.id=this.data.userId;
+    data.serviceTime=this.data.userTop.serviceTime;
+    data.ifUnderLine=this.data.userTop.ifUnderLine;
+    if(this.data.abilityChecks && this.data.abilityChecks.length>0){
+      data.abilityTag=this.data.abilityChecks.join(',');
+    }
+    if(this.data.skillChecks && this.data.skillChecks.length>0){
+      data.skillTag=this.data.skillChecks.join(',');
+    }
+
+    console.log(data);
+    request({
       method: "PUT",
-      url: "http://localhost:8080/jeecg-boot/api/mini/user/edituser",
+      url: "/edituser",
       data: data,
       header: {
         'content-type': 'application/json'
-      },
-      success: function(res) {
-        wx.showToast({
-          title: '保存成功',
-          duration: 2000
-        })
       }
+    }).then(res=>{
+      wx.showToast({
+        title: '保存成功',
+        duration: 2000
+      })
+      wx.navigateBack({
+        delta:1
+      });
     })
-
   },
   btnClickService(e) {
-    console.log(e)
     this.setData({
-      serviceTimeValue:e.detail.value,
+      'userTop.serviceTime':e.detail.value,
       serviceTimeText:this.data.serviceGroups[e.detail.index].text,
       serviceFlag: 0
     })
     this.close()
   },
   btnClickUnderLine(e) {
-    console.log(e)
     this.setData({
-      underLineValue:e.detail.value,
+      'userTop.ifUnderLine':e.detail.value,
       underLineText:this.data.underLineGroups[e.detail.index].text,
       underlineFlag: 0
     })
@@ -139,113 +293,79 @@ Page({
     })
   },
   checkboxChangeSkill: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e)
-    const bb=e.detail.value;
-    //TODO :
-    const aa= this.data.items.filter(function (e) { return  bb.includes(e.name); })
-        .map(function(s){return s.value});
+    console.log(e.detail.value)
+    // const bb=e.detail.value;
     this.setData({
       skillChecks: e.detail.value,
-      skillChecksText:aa,
+      // skillChecksText:aa,
       skillFlag: 0
     })
   },
   checkboxChangeAbility: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e)
     const bb=e.detail.value;
     //TODO :
-   const aa= this.data.items.filter(function (e) { return  bb.includes(e.name); })
-       .map(function(s){return s.value});
     this.setData({
       abilityChecks: e.detail.value,
-      alilityChecksText:aa,
       abilityFlag: 0
     })
 
   },
   showSkillDialog(e){
+    if(this.data.skillChecks && this.data.skillChecks.length>0){
+      let skillArray=this.data.skillChecks;
+
+      const list= this.data.skillTagList;
+
+        for(let c in list){
+          if(skillArray.includes(list[c].code) ){
+            var temp_str='skillTagList['+c+'].checked';
+            console.log(temp_str);
+            this.setData({
+              [temp_str]:true
+            });
+          }
+        }
+
+    }
     this.setData({
       showSkillModal:true
     })
   },
   showAbilityDialog(e){
+    //勾选能力标签
+    if(this.data.abilityChecks && this.data.abilityChecks.length>0){
+      let abilityArray=this.data.abilityChecks;
+
+      const list= this.data.abilityTagList;
+      for(let a in list){
+        for(let c in list[a].child){
+          if(abilityArray.includes(list[a].child[c].code) ){
+            var temp_str='abilityTagList['+a+'].child['+c+'].checked';
+            console.log(temp_str);
+            this.setData({
+              [temp_str]:true
+            });
+          }
+        }
+      }
+    }
     this.setData({
       showAbilityModal:true
     })
   },
   modalConfirmSkill(e){
-    console.log(33333)
     this.setData({
       showSkillModal:false
     })
   },
   modalConfirmAbility(e){
-    console.log(33333)
     this.setData({
       showAbilityModal:false
     })
   },
-  changeIconStatu: function () {
-    var self = this;
-    this.setData({ elevatorFlag: !self.data.elevatorFlag});
-  },
-  getNameValue: function (e) {
-    this.setData({ nameValue: e.detail.value });
-  },
-  getUniversityValue(e){
-    this.setData({ universityValue: e.detail.value });
-  },
-  getMajorValue(e){
-    this.setData({ majorValue: e.detail.value });
-
-  },
-  getEducationValue(e){
-    this.setData({ educationValue: e.detail.value });
-
-  },
-  getPhoneValue: function (e) {
-    this.setData({ phoneValue: e.detail.value });
-  },
-  getEmailValue(e){
-    this.setData({ emailValue: e.detail.value });
-  },
-  getWorkYearValue(e){
-    this.setData({ workYearValue: e.detail.value });
-  },
-  getWorkPlaceValue(e){
-    this.setData({ workPlaceValue: e.detail.value });
-  },
-  handleCheckboxChange(e){
-    this.setData({isShowWorkplace:!this.data.isShowWorkplace})
-    console.log(this.data.isShowWorkplace)
-  },
-  getCertificatePriceValue(e){
-    this.setData({ certificationPriceValue: e.detail.value });
-  },
-  getWorkHistoryValue(e){
-    this.setData({ workHistoryValue: e.detail.value });
-  },
-  getResumeValue(e){
-    this.setData({ resumeValue: e.detail.value });
-  },
   bindRegionChange: function (e) {
     this.setData({ region: e.detail.value, regionFlag: 0 });
   },
-  getAddressValue: function (e) {
-    this.setData({ addressValue: e.detail.value });
-  },
-  getFloorValue: function (e) {
-    this.setData({ floorValue: e.detail.value });
-  },
 
-  // defaultChange: function (e){
-  //   if (e.detail.value){
-  //     this.setData({ addressStatus: 1 });
-  //   }else{
-  //     this.setData({ addressStatus: 0 });
-  //   }
-  // },
-  saveNewAddress: function () {
 
-  }
 });
