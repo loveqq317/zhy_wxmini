@@ -1,0 +1,28 @@
+.card_wrap {
+  padding: 20rpx;
+  border-bottom: 1px dotted #F4F4F4;
+  color: #999999;
+  overflow: hidden;
+  /* display: flex;
+   display: -webkit-flex;
+   justify-content: space-around;
+   flex-direction: row;
+   flex-wrap: wrap;*/
+}
+.card_wrap .tag_title {
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  width: 100%;
+  clear: both;
+  color: #666666;
+}
+.card_wrap .tag {
+  background-color: #e3e3e3;
+  padding: 10rpx;
+  margin: 10rpx 5rpx;
+  border-radius: 16rpx;
+  font-size: 12px;
+  float: left;
+  width: 31%;
+  text-align: center;
+}

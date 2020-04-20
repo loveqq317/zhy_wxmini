@@ -156,14 +156,16 @@
             <view class='modal-content' >
                 <view class="modal_title">请选择您的能力标签</view>
                 <view class="modal_info">最多选择两个专业方向，每个专业方向下最多选择5个标签</view>
-                <view wx:for="{{abilityTagList}}" wx:key="{{item.id}}">
-                    <view class="tag_title">{{item.name}}</view>
-                    <checkbox-group class="tag_group" bindchange="checkboxChangeAbility">
-                        <label class="tag_checkbox" wx:for="{{item.child}}" wx:for-index="{{item.child.id}}" wx:for-item="child">
-                            <checkbox value="{{child.code}}"  checked="{{child.checked}}"/>{{child.name}}
-                        </label>
+
+                    <checkbox-group class="tag_group"  bindchange="checkboxChangeAbility">
+                        <view wx:for="{{abilityTagList}}" wx:key="{{item.id}}">
+                            <view class="tag_title">{{item.name}}</view>
+                            <label class="tag_checkbox" wx:for="{{item.child}}" wx:for-index="{{item.child.id}}" wx:for-item="child">
+                                <checkbox value="{{child.code}}"  checked="{{child.checked}}"/>{{child.name}}
+                            </label>
+                        </view>
                     </checkbox-group>
-                </view>
+
 
             </view>
         </MyModal>

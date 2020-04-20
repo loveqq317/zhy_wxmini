@@ -17,23 +17,37 @@ Page({
     ],
     userId:{},
     userProfile:{},
-    token:null
+    token:null,
+    tags:[],
+    abilityTags:[]
   },
+
   handleLogin(){
     wx.navigateTo({
       url:"../auth/index"
+    })
+  },
+  getAbilityTagList(pcode) {
+    request({
+      url: "/categoryByCode",
+      data: {
+        pcode
+      },
+      header: {
+        'content-type': 'application/json'
+      }
+    }).then(res => {
+      const result = res.result
+      this.setData({
+        tags: result
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //获取缓存中的 用户信息
-    let userInfo = wx.getStorageSync("userInfo");
-    let token=wx.getStorageSync("token");
-    const userId=wx.getStorageSync("userId");
-    this.setData({userInfo,token,userId});
-    this.getUserProfile(userId);
+
 
   },
   getUserProfile(userId){
@@ -47,8 +61,10 @@ Page({
       },
     }).then(res=>{
       this.setData({
-        userProfile:res.result
+        userProfile:res.result,
+        abilityTags:res.result.abilityTag.split(",")
       })
+
     })
   },
   /**
@@ -62,7 +78,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //获取缓存中的 用户信息
+    let userInfo = wx.getStorageSync("userInfo");
+    let token=wx.getStorageSync("token");
+    const userId=wx.getStorageSync("userId");
+    this.setData({userInfo,token,userId});
+    this.getUserProfile(userId);
+    this.getAbilityTagList("B01");
 
   },
 

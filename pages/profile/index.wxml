@@ -41,8 +41,8 @@
                 <view class="my">基本资料</view>
                 <view class="card_info_wrap">
                     <block>
-                        <CardInfo title="擅长专业——规划设计" info=""></CardInfo>
-                        <CardInfo title="擅长专业——建筑设计" info=""></CardInfo>
+                        <TagCardInfo title="擅长专业——规划设计" tags="{{tags}}" selectTags="{{abilityTags}}"></TagCardInfo>
+
                     </block>
                 </view>
             </view>

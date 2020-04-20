@@ -1,0 +1,22 @@
+<wxs module="m">
+   var ifExit=function(code,array){
+      return array.indexOf(code)>-1
+    }
+    module.exports.ifExit = ifExit;
+</wxs>
+
+<view class="card_wrap">
+
+
+
+        <block wx:for="{{tags}}" wx:key="{{item.id}}">
+            <view class="tag_title">能力标签——{{item.name}}</view>
+                <block wx:for="{{item.child}}" wx:for-index="{{item.child.id}}" wx:for-item="child"  >
+                    <view  class="tag" wx:if="{{m.ifExit(child.code,selectTags)}}" >
+                     {{child.name}}
+                    </view>
+                </block>
+        </block>
+
+
+</view>

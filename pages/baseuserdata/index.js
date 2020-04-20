@@ -302,7 +302,21 @@ Page({
     })
   },
   checkboxChangeAbility: function (e) {
-    const bb=e.detail.value;
+    console.log(e)
+    // <checkbox value="{{child.code}},{{child.name}}"  checked="{{child.checked}}"/>{{child.name}}
+    // let item = e.detail.value //选中的数组
+    // let code = []; //选中的ID
+    // let name = []; //选中的NAME
+    //
+    // //循环选中的数组，取出对应的数据进行数组拼接
+    // for (let i = 0; i < item.length; i++) {
+    //   let row = item[i].split(",") //将数组进行分割
+    //   code = code.concat(row[0]) //数组下表的第一个为id
+    //   name = name.concat(row[1]) //数组下表的第二个为name
+    // }
+    // console.log(code)
+    // console.log(name)
+    //let array=this.ablilityTag;
     //TODO :
     this.setData({
       abilityChecks: e.detail.value,
