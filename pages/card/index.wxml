@@ -1,0 +1,32 @@
+<view>
+    <canvas canvas-id='share' style='width:375px;height:580px'  hidden='{{canvasHidden}}'></canvas>
+    <view class='container-main'>
+
+        <view class='point-img'>
+            <image src='../../images/card/bg.png' class='bjt' mode="widthFix"></image>
+            <view class="point-container">
+                <view>
+                    <view class="am-img"><image src='../../images/designer.png'></image></view>
+                    <view class='am-cname'>姓名：<text>张三</text></view>
+                    <view class='am-cname'>职位：<text>设计师</text></view>
+                    <view class='am-cname'>公司：<text>北京市红石庄园公司</text></view>
+
+
+                </view>
+                <view class='am-email'>手机号：<text>18513179802</text></view>
+                <view class='am-email'>邮箱：<text>1052318524@qq.com</text></view>
+                <view class='am-email'>地址：<text>河北省廊坊市广阳区和平路1号</text></view>
+
+
+            </view>
+
+        </view>
+    </view>
+
+    <view class='am-footer'>
+        <button open-type="share" data-tag="share" id="btn_share">转发名片</button>
+        <button bindtap=''>编辑名片</button>
+
+    </view>
+
+</view>

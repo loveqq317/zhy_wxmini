@@ -3,7 +3,7 @@
 App({
 
   onLaunch: function () {
-
+    console.log(this.globalData.userInfo)
 
     // wx.getSetting({
     //   success: (res)=> {

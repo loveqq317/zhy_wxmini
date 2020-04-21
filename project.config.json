@@ -97,6 +97,20 @@
 					"id": -1,
 					"name": "pages/auth/index",
 					"pathName": "pages/auth/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/card/index",
+					"pathName": "pages/card/index",
 					"scene": null
 				}
 			]

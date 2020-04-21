@@ -40,10 +40,18 @@
             <view class="user_info_show">
                 <view class="my">基本资料</view>
                 <view class="card_info_wrap">
-                    <block>
-                        <TagCardInfo title="擅长专业——规划设计" tags="{{tags}}" selectTags="{{abilityTags}}"></TagCardInfo>
-
-                    </block>
+                  <TagCardInfo title="擅长专业" tags="{{abilityAllTags}}" selectTags="{{abilityTags}}"></TagCardInfo>
+                  <TagCardInfo title="拥有技能" tags="{{skillAllTags}}" selectTags="{{skillTags}}">
+                      <view>拥有技能</view>
+                  </TagCardInfo>
+                    <CardInfo title="教育经历">
+                        <view>毕业学校：{{userProfile.university}}</view>
+                        <view>专业：{{userProfile.major}}</view>
+                        <view>学历：{{userProfile.education}}</view>
+                    </CardInfo>
+                    <CardInfo title="个人简介">
+                        <view>{{userProfile.resume}}</view>
+                    </CardInfo>
                 </view>
             </view>
             <!--基本资料展示  结束-->

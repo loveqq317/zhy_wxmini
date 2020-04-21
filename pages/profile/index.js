@@ -18,8 +18,10 @@ Page({
     userId:{},
     userProfile:{},
     token:null,
-    tags:[],
-    abilityTags:[]
+    abilityAllTags:[],
+    skillAllTags:[],
+    abilityTags:[],
+    skillTags:[]
   },
 
   handleLogin(){
@@ -27,8 +29,8 @@ Page({
       url:"../auth/index"
     })
   },
-  getAbilityTagList(pcode) {
-    request({
+  getCategoryList(pcode) {
+   return  request({
       url: "/categoryByCode",
       data: {
         pcode
@@ -36,11 +38,6 @@ Page({
       header: {
         'content-type': 'application/json'
       }
-    }).then(res => {
-      const result = res.result
-      this.setData({
-        tags: result
-      })
     })
   },
   /**
@@ -62,7 +59,8 @@ Page({
     }).then(res=>{
       this.setData({
         userProfile:res.result,
-        abilityTags:res.result.abilityTag.split(",")
+        abilityTags:res.result.abilityTag.split(","),
+        skillTags:res.result.skillTag.split(",")
       })
 
     })
@@ -84,7 +82,18 @@ Page({
     const userId=wx.getStorageSync("userId");
     this.setData({userInfo,token,userId});
     this.getUserProfile(userId);
-    this.getAbilityTagList("B01");
+    this.getCategoryList("B01").then(res => {
+      const result = res.result
+      this.setData({
+        abilityAllTags: result
+      })
+    });
+    this.getCategoryList("B02").then(res => {
+      const result = res.result
+      this.setData({
+        skillAllTags: result
+      })
+    });
 
   },
 

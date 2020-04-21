@@ -10,7 +10,8 @@
     "pages/userdata/index",
     "pages/baseuserdata/index",
     "pages/phone/index",
-    "pages/auth/index"
+    "pages/auth/index",
+    "pages/card/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

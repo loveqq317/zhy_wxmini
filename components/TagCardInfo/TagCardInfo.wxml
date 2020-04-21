@@ -6,16 +6,24 @@
 </wxs>
 
 <view class="card_wrap">
-
+    <view class="tag_title"><slot></slot></view>
 
 
         <block wx:for="{{tags}}" wx:key="{{item.id}}">
-            <view class="tag_title">能力标签——{{item.name}}</view>
+            <block wx:if="{{item.child.length>0}}">
+                <view class="tag_title">{{title}}——{{item.name}}</view>
                 <block wx:for="{{item.child}}" wx:for-index="{{item.child.id}}" wx:for-item="child"  >
                     <view  class="tag" wx:if="{{m.ifExit(child.code,selectTags)}}" >
-                     {{child.name}}
+                        {{child.name}}
                     </view>
                 </block>
+            </block>
+            <block wx:else>
+                <view  class="tag" wx:if="{{m.ifExit(item.code,selectTags)}}" >
+                    {{item.name}}
+                </view>
+            </block>
+
         </block>
 
 

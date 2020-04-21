@@ -13,7 +13,7 @@ Page({
     //1、获取用户信息后，放到缓存中
     const {userInfo}=e.detail;
     wx.setStorageSync("userInfo",userInfo);
-
+    app.globalData.userInfo=userInfo;
 
     //2、判断token，判断是否要进行登录，token 为系统里自定义的登录态
     const token=wx.getStorageSync('token');

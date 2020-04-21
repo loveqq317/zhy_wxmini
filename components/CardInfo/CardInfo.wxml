@@ -1,4 +1,6 @@
 <view class="card_wrap">
     <view class="card_title">{{title}}</view>
-    <view class="card_info">{{info}}</view>
+    <view class="card_info">
+        <slot></slot>
+    </view>
 </view>

@@ -9,10 +9,18 @@
   display: flex;
   text-align: center;
 }
-.index_cate navigator {
-  margin: 30rpx;
+.index_cate .shareBtn {
+  background: none;
+  border: none;
   flex: 1;
+  line-height: 30rpx;
+  margin: 10rpx 0;
 }
-.index_cate navigator image {
+.index_cate .shareBtn image {
   width: 95%;
+  height: 100rpx;
+}
+.index_cate .shareBtn::after {
+  background: none;
+  border: none;
 }

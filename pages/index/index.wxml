@@ -21,10 +21,22 @@
     <!--轮播图  结束-->
     <!--导航  开始-->
     <view class="index_cate">
-        <navigator wx:for="{{cateList}}" wx:key="id">
-            <image mode="widthFix" src="{{item.image_src}}"></image>
-            <text>{{item.name}}</text>
-        </navigator>
+        <button open-type="share" class="shareBtn">
+            <image mode="widthFix" src="/images/card.png"></image>
+            <text>发送名片</text>
+        </button>
+        <button  class="shareBtn">
+            <image mode="widthFix" src="/images/publish.png"></image>
+            <text>发布项目</text>
+        </button>
+        <button  class="shareBtn">
+            <image mode="widthFix" src="/images/accept.png"></image>
+            <text>承接项目</text>
+        </button>
+        <button  class="shareBtn">
+            <image mode="widthFix" src="/images/designer.png"></image>
+            <text>加入我们</text>
+        </button>
     </view>
     <!--导航  结束-->
     <!-- 首页项目展示  开始  -->
